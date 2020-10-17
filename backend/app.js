@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -47,11 +47,7 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-const USER_DB = "phamhoannuce";
-const PASS_WORD = "Xda@08121994";
-
-const databaseName = "places";
-const mongodbUrl = `mongodb+srv://${USER_DB}:${PASS_WORD}@mernpro.tbpm6.gcp.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
+const mongodbUrl = `mongodb+srv://${process.env.USER_DB}:${process.env.PASS_WORD}@mernpro.tbpm6.gcp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 mongoose
   .connect(mongodbUrl, {
