@@ -3,12 +3,15 @@ const { check } = require('express-validator');
 
 const placesControllers = require('../controllers/places-controllers');
 const fileUpload = require('../middleware/file-upload');
-
+const checkAuthToken = require('./../middleware/check-authToken')
 const router = express.Router();
 
 router.get('/:pid', placesControllers.getPlaceById);
 
 router.get('/user/:uid', placesControllers.getPlacesByUserId);
+
+// Token check from here to protect delete and edit function
+router.use(checkAuthToken)
 
 router.post(
   '/',
